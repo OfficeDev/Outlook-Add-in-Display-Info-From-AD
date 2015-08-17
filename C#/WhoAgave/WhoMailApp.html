@@ -1,0 +1,261 @@
+﻿<!-- Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file. -->
+<html>
+<head>
+    <title>Who's Who?</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="css/whomailapp.css" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        window.onresize = function () {
+            UpdateLayout();
+        }
+    </script>
+
+    <script type="text/javascript">
+        var baseUrl = location.href.substring(0, location.href.lastIndexOf('/') + 1);
+        var _mailboxItem = null;
+
+        Office.initialize = function () {
+            try {
+                _mailboxItem = Office.context.mailbox.item;
+                // Check for the DOM to load before proceeding.
+                $(document).ready(function () {
+                    // After the DOM is loaded, app-specific code can run.
+                    UpdateLayout();
+                    AddContactsToNavBar();
+                });
+            }
+            catch (err) {
+                ShowErrorMessage();
+            }
+        }
+
+        // Handle the click event for each contact.
+        // Passes the data-id which is an SMTP address
+        // to FindPerson.
+        $(function () {
+            $("div").delegate(".contact", "click", function () {
+                var dataId = $(this).attr("data-id");
+                if (dataId != '') {
+                    FindPerson(dataId);
+                }
+            });
+        });
+
+        // Helper function to add contacts to the navigation bar.
+        function AddContactsToNavBar() {
+            AddContactToNavBar(_mailboxItem.sender.emailAddress);
+
+            for (var index in _mailboxItem.to) {
+                AddContactToNavBar(_mailboxItem.to[index].emailAddress);
+            }
+
+            for (var index in _mailboxItem.cc) {
+                AddContactToNavBar(_mailboxItem.cc[index].emailAddress);
+            }
+
+            $('#contactBar img').each(function () {
+                $(this).addClass(this.width > this.height ? 'landscape' : 'portrait');
+            });
+
+            // Get and display information of the sender by passing 
+            // the sender's primary SMTP address.
+            FindPerson(_mailboxItem.sender.emailAddress);
+        }
+
+        function AddContactToNavBar(contactEmail) {
+            // Enhancement opportunity: reorganize code to get and display person's picture in navigation bar.
+            // Store the SMTP address as data-id.
+            $('#contactBar').append('<div class="contact contactPreview" data-id="' + contactEmail + '" title="' + contactEmail + '"><img class="contactThumbnail" src="img/anonymous.jpg"/></div>');
+        }
+
+        // Get person information from Active Directory, and display it.
+        // Parameter emailAddress is an SMTP address.
+        function FindPerson(emailAddress) {
+            // Construct request URL to web service running on the same server.
+            var urlRequest = baseUrl + 'WhoService.svc/FindPerson?emailAddress=' + emailAddress;
+
+            $.ajax({
+                url: urlRequest,
+                type: "GET",
+                xhrFields: {
+                    withCredentials: true
+                },
+                contentType: "text/xml; charset=\"utf-8\"",
+                complete: function (result) {
+                    if (result.responseText == null || result.responseText == "") {
+                        return;
+                    }
+
+                    var response = JSON.parse(result.responseText);
+
+                    $('#mainContactDiv').empty();
+                    $('#managerContactDiv').empty();
+                    $('#directContactDiv').empty();
+
+                    $('#mainContactDiv').append(RenderMainContactView(response.Person));
+
+                    // Some people do not have a manager, for example, the CEO.
+                    if (response.Manager != null) {
+                        $('#managerContactDiv').append(RenderPersonView(response.Manager));
+                    }
+
+                    if (response.Directs != null && response.Directs.length > 0) {
+                        var directDiv = $('#directContactDiv');
+
+                        for (i = 0; i < response.Directs.length; i++) {
+                            directDiv.append(RenderPersonView(response.Directs[i]));
+                        }
+                        directDiv.show();
+                    }
+
+                    // Dynamically determine and style each image with the appropriate CSS class
+                    // to display image in the corresponding orientation.
+                    $('#mainContent img').each(function () {
+                        $(this).addClass(this.width > this.height ? 'landscape' : 'portrait');
+                    });
+
+                    UpdateLayout();
+                }
+            });
+        }
+
+        // Helper function to generate HTML to display the main person - the sender.
+        function RenderMainContactView(person) {
+            var html = "";
+
+            if (person) {
+                var phone = person.Telephone.substr(0, person.Telephone.indexOf("X") - 1);
+
+                html = '<div class="contactCard">' +
+					'<div class="image_div">' +
+						'<img class="contactPhoto" src="data:image/jpg;base64,' + person.EncodedThumbnail + '"/>' +
+					'</div>' +
+					'<div class="info_div">' +
+						FormatContactInfo("contactName", person.DisplayName) +
+						FormatContactInfo("contactTitle", person.Title) +
+					'</div>' +
+					'<div class="sub_info_div">' +
+						FormatContactInfo("contactInfo", person.Department) +
+						'<span class="contactInfo">' +
+							person.Alias + ' (' + person.Office + ')' +
+						'</span><br/>' +
+						FormatContactInfo("contactInfo", phone) +
+						'<span class="contactInfo">' +
+							'<a title="email" href="mailto:' + person.EmailAddress + '"><img class="social_link_img" src="img/envelop.png"/></a>' +
+							'<a title="call" href="tel:' + phone + '"><img class="social_link_img" src="img/telephone.png"/></a>' +
+						'</span>' +
+					'</div>' +
+			'</div>';
+            }
+            return html;
+        }
+
+        // Helper function to generate HTML for a person other than the sender.
+        // Also store SMTP address in data-id, so that clicking a contact card
+        // would result in calling FindPerson with the SMTP address.
+        function RenderPersonView(person) {
+            var html = "";
+
+            if (person) {
+                html = '<div class="contact contactCard" data-id="' + person.EmailAddress + '" title="' + person.EmailAddress + '">' +
+								'<div class="image_div">' +
+										'<img class="contactPhoto" src="data:image/jpg;base64,' + person.EncodedThumbnail + '"/>' +
+								'</div>' +
+								'<div class="info_div">' +
+									'<div class="contactName">' + person.DisplayName + '</div>' +
+									'<div class="contactTitle">' + person.Title + '</div>' +
+								'</div>' +
+									((person.DirectsCount == 0) ? '' : ('<div class="orgSize">+' + person.DirectsCount + '</div>')) +
+								'</div>';
+            }
+            return html;
+        }
+
+        // Helper function to generate formatted text.
+        function FormatContactInfo(classInfo, contactInfo) {
+            if (contactInfo == null || contactInfo == "") {
+                return "";
+            }
+
+            return '<span class="' + classInfo + '">' + contactInfo + '</span><br/>';
+        }
+
+
+        // Simple attempt to update the layout.
+        function UpdateLayout() {
+
+            var width_unit = 180;
+            var height_unit = 72;
+
+            $('#directContactDiv').width($(window).width() - $('#mainContactDiv').width() - $('#managerContactDiv').width() - 12);
+
+            if ($(window).width() < width_unit) {
+                $('#directContactDiv').hide();
+                $('#managerContactDiv').hide();
+                $('mainContactDiv').hide();
+            }
+            else if ($(window).width() < 2 * width_unit) {
+                $('#directContactDiv').hide();
+                $('#managerContactDiv').hide();
+                $('mainContactDiv').show();
+            }
+            else if ($(window).width() < 3 * width_unit) {
+                $('#directContactDiv').hide();
+                $('#managerContactDiv').show();
+                $('mainContactDiv').show();
+            }
+            else {
+                $('#directContactDiv').show();
+                $('#managerContactDiv').show();
+                $('mainContactDiv').show();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="mailApp">
+        <div id="topBar">
+            <div id="contactBar">
+            </div>
+        </div>
+        <div id="mainContent">
+            <div id="mainContactDiv">
+            </div>
+            <div id="managerContactDiv">
+            </div>
+            <div id="directContactDiv">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!-- Outlook-Add-in-Display-Info-From-AD, https://github.com/OfficeDev/Outlook-Add-in-Display-Info-From-AD
+
+
+Copyright (c) Microsoft Corporation
+All rights reserved.
+
+MIT License:
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-->

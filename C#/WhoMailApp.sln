@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoWebService", "WhoAgave\WhoWebService.csproj", "{A8382F80-0A24-4CC1-84AB-3CC6368BD735}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveDirectoryWrapper", "ActiveDirectory\ActiveDirectoryWrapper.csproj", "{B4873B47-62CD-4786-8526-9316B2BF5415}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://greentea.tfspreview.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ActiveDirectory\\ActiveDirectoryWrapper.csproj
+		SccProjectName1 = ActiveDirectory
+		SccLocalPath1 = ActiveDirectory
+		SccProjectUniqueName2 = WhoAgave\\WhoWebService.csproj
+		SccProjectName2 = WhoAgave
+		SccLocalPath2 = WhoAgave
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8382F80-0A24-4CC1-84AB-3CC6368BD735}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8382F80-0A24-4CC1-84AB-3CC6368BD735}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8382F80-0A24-4CC1-84AB-3CC6368BD735}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8382F80-0A24-4CC1-84AB-3CC6368BD735}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4873B47-62CD-4786-8526-9316B2BF5415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4873B47-62CD-4786-8526-9316B2BF5415}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4873B47-62CD-4786-8526-9316B2BF5415}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4873B47-62CD-4786-8526-9316B2BF5415}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

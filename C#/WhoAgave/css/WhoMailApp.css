@@ -1,0 +1,309 @@
+﻿/* Main Layout */
+html
+{
+    height:100%;
+}
+
+body
+{
+    width:100%;
+    height:100%;
+    font-size:10px;
+    font-family: "Segoe UI",  "Arial", "sans-serif";
+    color: rgb(102,102,102);
+    float:left;
+    overflow:hidden;
+}
+
+img {
+    border-style:none;
+}
+
+a { color: white;  text-decoration:none; }
+a:visited { color:white; }
+a:hover { color:white; text-decoration:none; cursor:pointer }
+a:focus { outline: 0; }
+a:hover, a:active { outline: 0; }
+
+.mailApp
+{
+    width:100%;
+    float:left;
+    position:fixed;
+    top:0px;
+    left:0px;
+}
+
+#topBar
+{
+    width:100%;
+    height:34px;
+    position:relative;
+    float:left;
+    overflow:hidden;
+}
+
+#mainContent
+{
+    position:relative;
+    width:100%;
+    height:100%;
+    min-height:150px;
+    float:left;
+    overflow:hidden;
+}
+
+#bottomBar
+{
+    width:100%;
+    height:20px;
+    float:left;
+    overflow:hidden;
+    text-align:right;
+}
+
+#contactBar
+{
+    padding-left:2px;
+    float:left;
+    overflow:hidden;
+}
+
+#loadingStatus
+{
+    width:30px;
+    float:right;
+}
+
+#settingsDiv
+{
+    width:30px;
+    float:right;
+    padding-right:2px;
+    text-align:center;
+    font-size:.75em;
+}
+
+.loadingImg
+{
+    width:12px;
+    height:12px;
+    padding:9px;
+}
+
+.settingImg
+{
+    width:24px;
+    height:24px;
+    padding:2px;
+}
+
+#mainContentTitle {
+    height:30px;
+    width:100%;
+    float:left;
+}
+
+#mainContactDiv
+{
+    position:relative;
+    left:2px;
+    width:180px;
+    margin-right:4px;
+    height:100%;
+    float:left;
+}
+
+#managerContactDiv
+{
+    position:relative;
+    width:180px;
+    left:2px;
+    margin-right:4px;
+    float:left;
+}
+
+#directContactDiv
+{
+    position:relative;
+    left:2px;
+    height:230px;
+    float:left;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+/* End Main Layout */
+
+/* Other Contact */
+.contactName
+{
+    font-size:1.2em;
+    font-weight:bold;
+    color:white;
+}
+
+.contactTitle {
+    font-size:1em;
+    color:white;
+}
+
+.contactInfo
+{
+    color:white;
+}
+
+.contactTitle {
+    color:white;
+}
+
+.orgSize {
+    margin-right:4px;
+    padding-bottom:2px;
+    float:right;
+    color:white;
+}
+
+.mainContactName {
+    font-size:1.2em;
+    font-weight:bold;
+}
+
+.contactCard
+{
+    float:left;
+    height:72px;
+    width:180px;
+    margin-right:4px;
+    margin-bottom:4px;
+    overflow:hidden;
+    cursor: pointer;
+}
+
+#mainContactDiv .contactCard
+{
+    background-color:rgb(0,114,198);
+    height:224px;
+    cursor:default;
+}
+
+.info_div
+{
+    height:100%;
+    max-height:58px;
+    overflow:hidden;
+}
+
+.sub_info_div {
+    float:left;
+    width:180px;
+    height:100%;
+    max-height:136px;
+    margin-top:2px;
+    margin-left:2px;
+}
+
+
+#mainContactDiv .info_div
+{
+    height:100%;
+    padding-left:2px;
+    max-height:72px;
+}
+
+#managerContactDiv .contactCard
+{
+    background-color:rgb(0,114,198);
+}
+
+#directContactDiv .contactCard
+{
+    background-color:rgb(106,192,255);
+}
+
+#directContactDiv .contactName
+{
+    color:white;
+}
+
+#directContactDiv .contactInfo
+{
+    color:white;
+}
+
+.image_div
+{
+    width:72px;
+    height:72px;
+    padding-right:2px;
+    float:left;
+    overflow:hidden;
+}
+
+.contactPhoto
+{
+}
+
+.landscape
+{
+    height:72px;
+}
+
+.portrait
+{
+    width:72px;
+}
+
+.social_link_img {
+    width:16px;
+    height:16px;
+    padding-top:1px;
+    padding-right:4px;
+    border-style:none;
+}
+
+.contactPreview
+{
+    width:28px;
+    height:28px;
+    float:left;
+    margin-top:2px;
+    margin-right:1px;
+    margin-bottom:2px;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.contactThumbnail
+{
+}
+
+.contactPreview .landscape {
+    height:28px;
+}
+
+.contactPreview .portrait {
+    width:28px;
+}
+
+.supportInfo
+{
+    font-size:1em;
+    padding-right:4px;
+}
+
+/******************************************************************
+Scrollbars
+******************************************************************/
+body
+{
+	scrollbar-base-color:white;
+	scrollbar-arrow-color:#ababab;
+	scrollbar-lightshadow-color:#ababab;
+	scrollbar-highlight-color:#ababab;
+	scrollbar-darkshadow-color:white;
+	scrollbar-track-color:white;
+	scrollbar-background-color:white;
+	scrollbar-face-color:white;
+
+}

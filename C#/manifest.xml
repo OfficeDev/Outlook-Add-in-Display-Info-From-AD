@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="MailApp">
+  <Id>69CC567C-6737-4C49-88DD-123334974567</Id> 
+  <Version>1.0</Version> 
+  <ProviderName>Microsoft</ProviderName> 
+  <DefaultLocale>en-US</DefaultLocale> 
+  <DisplayName DefaultValue="Who's Who AD"/> 
+  <Description DefaultValue="Show people and organization data from Active Directory. Corporate network connection is required to use this mail app."/>
+  <!-- Change the following line to specify the web server -->
+  <!-- where the icon file is hosted. --> 
+  <IconUrl DefaultValue="https://webserver/WhosWhoAD/img/app_icon.png"/> 
+  <Capabilities>
+    <Capability Name="Mailbox" />
+  </Capabilities>
+  <DesktopSettings> 
+    <!-- Change the following line to specify the web server -->
+    <!-- where the HTML file is hosted. -->
+    <SourceLocation DefaultValue="https://webserver/WhosWhoAD/WhoMailApp.html"/> 
+    <RequestedHeight>260</RequestedHeight> 
+  </DesktopSettings> 
+  <Permissions>ReadItem</Permissions> 
+  <Rule xsi:type="RuleCollection" Mode="And">
+    <Rule xsi:type="ItemIs" ItemType="Message" />
+    <Rule xsi:type="ItemHasRegularExpressionMatch" RegExValue="@" RegExName="addressMatches" PropertyName="SenderSMTPAddress" />
+  </Rule>
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+</OfficeApp>
