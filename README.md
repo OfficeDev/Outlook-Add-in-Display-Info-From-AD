@@ -1,7 +1,7 @@
 # Outlook-Add-in-Display-Info-From-AD
 Learn from this prototype mail add-in how to access basic hierarchy information from Active Directory. Extend this prototype to customize the mail add-in for your organization.
 
-**Description of the Who's Who AD mail app sample**
+**Description of the Who's Who AD mail add-in sample**
 
 This sample accompanies the topic  [How to: Create a mail app to display hierarchy information from Active Directory](http://blogs.msdn.com/b/officeapps/archive/2013/05/15/creating-a-mail-app-to-check-out-active-directory-org-information-for-mail-senders-and-recipients.aspx) in the Apps for Office and SharePoint Blog.
 
@@ -149,7 +149,7 @@ You should be able to see the Active Directory data in the add-in pane, similar 
 
 If the sender or recipient of an email message has an email address of the form <first name>.<last name>@<domain>, the Active Directory wrapper may not be able to search for the appropriate person in Active Directory. Choose a person whose email address is simply of the form <alias>@<domain>.
 
-Because the Who's Who AD mail app is intended to serve as a prototype, there is room for you to customize the mail add-in to fit the requirements of your organization. See the Future extension section in the accompanying article for more information.
+Because the Who's Who AD mail add-in is intended to serve as a prototype, there is room for you to customize the mail add-in to fit the requirements of your organization. See the Future extension section in the accompanying article for more information.
 
 **Related content**
 
