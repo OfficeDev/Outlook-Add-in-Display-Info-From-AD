@@ -153,4 +153,5 @@ Because the Who's Who AD mail add-in is intended to serve as a prototype, there 
 
 **Related content**
 
-[How to: Create a mail app to display hierarchy information from Active Directory](http://msdn.microsoft.com/library/bb419185-f004-4118-a53d-3b6c8e984c9e.aspx)
+* [More Add-in samples](https://github.com/OfficeDev?utf8=%E2%9C%93&query=-Add-in)
+* [How to: Create a mail app to display hierarchy information from Active Directory](http://msdn.microsoft.com/library/bb419185-f004-4118-a53d-3b6c8e984c9e.aspx)
