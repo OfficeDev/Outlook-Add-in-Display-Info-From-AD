@@ -1,7 +1,7 @@
 # Outlook-Add-in-Display-Info-From-AD
 Learn from this prototype mail add-in how to access basic hierarchy information from Active Directory. Extend this prototype to customize the mail add-in for your organization.
 
-**Description of the Who's Who AD mail app sample**
+**Description of the Who's Who AD mail add-in sample**
 
 This sample accompanies the topic  [How to: Create a mail app to display hierarchy information from Active Directory](http://blogs.msdn.com/b/officeapps/archive/2013/05/15/creating-a-mail-app-to-check-out-active-directory-org-information-for-mail-senders-and-recipients.aspx) in the Apps for Office and SharePoint Blog.
 
@@ -47,9 +47,9 @@ The following tools were used to develop the Who web service, and deploy the mai
 
 The download for this sample consists of the following files and folders:
 
-* Manifest.xml is the manifest file for the Who's Who AD mail app.
+* Manifest.xml is the manifest file for the Who's Who AD mail add-in.
 * WhoMailApp.sln is the Visual Studio solution file for the entire example.
-* The WhoAgave folder contains files for the mail app (including the HTML, images, and CSS files), and some of the files for the Who web service.
+* The WhoAgave folder contains files for the mail add-in (including the HTML, images, and CSS files), and some of the files for the Who web service.
 * The ActiveDirectory folder contains files for the Active Directory wrapper.
 * The BuildProcessTemplates folder contains default markup template files for developing WCF web services.
 
@@ -60,10 +60,10 @@ Use the following steps to obtain the files and modify their references, as appr
 1. On a local drive, for example d:, create a folder called WhosWhoAD and download the sample files there.
 2. Assuming the IIS web server you intend to host the Who's Who AD mail app is called webserver, create a folder called WhosWhoAD under \\webserver\c$\inetpub\wwwroot\.
 3. Copy the img folder and its contents from d:\WhosWhoAD\WhoAgave\ to \\webserver\c$\inetpub\wwwroot\WhosWhoAD\.
-The remaining mail app and web service files will be appropriately copied to webserver when you deploy the web service, as described in the section Deploy the web service below.
-4. Update the manifest file to reflect the actual location of the mail app HTML file.
+The remaining mail add-in and web service files will be appropriately copied to webserver when you deploy the web service, as described in the section Deploy the web service below.
+4. Update the manifest file to reflect the actual location of the mail add-in HTML file.
 
-The mail app manifest file, manifest.xml, is directly under d:\WhosWhoAD. If your actual web server has a different name than webserver, update manifest.xml to reflect the actual location of the WhoMailApp.html file, by replacing webserver in the following line with the server path of the WhosWhoAD folder you created in Step 2.
+The mail add-in manifest file, manifest.xml, is directly under d:\WhosWhoAD. If your actual web server has a different name than webserver, update manifest.xml to reflect the actual location of the WhoMailApp.html file, by replacing webserver in the following line with the server path of the WhosWhoAD folder you created in Step 2.
 
 ```XML
 <SourceLocation DefaultValue="https://webserver/WhosWhoAD/WhoMailApp.html"/>
@@ -77,7 +77,7 @@ The mail app manifest file, manifest.xml, is directly under d:\WhosWhoAD. If you
 ![Figure 3. Installing a mail app from a file in the Exchange Admin Center](/description/f7a57314-42f1-4d15-9752-60e45ade98c3image.png)
 
 4. In the add from file dialog box, browse to the location of manifest.xml in d:\WhosWhoAD, choose Open, and then choose Next.
-You should then see the Who's Who AD app in the list of add-ins for Outlook, as shown in Figure 4.
+You should then see the Who's Who AD add-in in the list of add-ins for Outlook, as shown in Figure 4.
 ![Figure 4. Who's Who AD app installed on the Exchange Admin Center](/description/3977704e-6d30-4067-bb17-e5d1f778795cimage.png)
 
 5. If Outlook is running, close and reopen Outlook.
@@ -89,18 +89,22 @@ Also, in Step 3, if you do not see Add from file as an option, you need to reque
 
 The Exchange administrator can run the following PowerShell cmdlet to assign a single user the necessary permissions. In this example, wendyri is the user's email alias.
 
+```POWERSHELL
 New-ManagementRoleAssignment -Role "My Custom Apps" -User "wendyri"
+ ```
 
 If necessary, the administrator can run the following cmdlet to assign similar permissions for multiple users:
 
+```POWERSHELL
 $users = Get-Mailbox *
 $users | ForEach-Object { New-ManagementRoleAssignment -Role "My Custom Apps" -User $_.Alias}
+ ```
 
 For more information about the My Custom Apps role, see  [My Custom Apps role](http://msdn.microsoft.com/library/aa0321b3-2ec0-4694-875b-7a93d3d99089(Office.15).aspx).
 
 **Deploy the web service**
 
-Do the following to deploy the Who web service and WhoMailApp.html mail app file:
+Do the following to deploy the Who web service and WhoMailApp.html mail add-in file:
 
 1. In Visual Studio, open WhoWebService.csproj.
 2. Choose Build, Publish WhoWebService.
@@ -136,17 +140,18 @@ The Who web service can now be accessed on webserver, and you can now use the Wh
 **Run and test the sample**
 
 1. In Outlook, choose an email to read in the Reading Pane.
-2. Choose the Who's Who AD mail app from the app bar.
+2. Choose the Who's Who AD mail add-in from the add-in bar.
 
-You should be able to see the Active Directory data in the app pane, similar to the example in Figure 1.
+You should be able to see the Active Directory data in the add-in pane, similar to the example in Figure 1.
 
 <a name="Troubleshooting"></a>
 **Troubleshooting**
 
 If the sender or recipient of an email message has an email address of the form <first name>.<last name>@<domain>, the Active Directory wrapper may not be able to search for the appropriate person in Active Directory. Choose a person whose email address is simply of the form <alias>@<domain>.
 
-Because the Who's Who AD mail app is intended to serve as a prototype, there is room for you to customize the mail app to fit the requirements of your organization. See the Future extension section in the accompanying article for more information.
+Because the Who's Who AD mail add-in is intended to serve as a prototype, there is room for you to customize the mail add-in to fit the requirements of your organization. See the Future extension section in the accompanying article for more information.
 
 **Related content**
 
-[How to: Create a mail app to display hierarchy information from Active Directory](http://msdn.microsoft.com/library/bb419185-f004-4118-a53d-3b6c8e984c9e.aspx)
+* [More Add-in samples](https://github.com/OfficeDev?utf8=%E2%9C%93&query=-Add-in)
+* [How to: Create a mail app to display hierarchy information from Active Directory](http://msdn.microsoft.com/library/bb419185-f004-4118-a53d-3b6c8e984c9e.aspx)
