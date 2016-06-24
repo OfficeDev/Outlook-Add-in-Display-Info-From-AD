@@ -1,5 +1,5 @@
 # Outlook-Add-in-Display-Info-From-AD
-Learn from this prototype mail add-in how to access basic hierarchy information from Active Directory. Extend this prototype to customize the mail add-in for your organization.
+Learn from this prototype mail add-in how to access basic hierarchy information from Active Directory (AD). Extend this prototype to customize the mail add-in for your organization.
 
 **Description of the Who's Who AD mail add-in sample**
 
@@ -10,13 +10,13 @@ When you select an email message in Outlook or Outlook Web App, you can choose t
 When you first choose this mail add-in, it retrieves and displays the sender's detailed professional and hierarchical information from Active Directory—name, job title, department, alias, office number, telephone number, and a picture thumbnail. If the sender has a manager or direct reports, the mail add-in displays a similar subset of information for each of them, as well. Figure 1 shows an example of the Who's Who AD add-in. The screen shot displays information for Belinda Newman, her manager, and direct reports.
 
 
-![Figure 1. Mail app displays Active Directory information for an email sender in Outlook](/description/image.png)
+![Figure 1. Mail app displays Active Directory information for an email sender in Outlook](/description/image.png "The Who's Who AD mail app showing tiles for each person with photo, name, and job title.")
  
 The mail add-in provides a navigation bar that allows you to choose a recipient and view detailed professional and hierarchy information that is stored in Active Directory.
 
 Behind the scenes, when you select a sender or recipient, the mail add-in calls a web service, named Who, to get the person's data from Active Directory. The web service includes an Active Directory wrapper, which uses Active Directory Domain Services (AD DS) to access information from Active Directory. After getting the data, the Who web service serializes the data in JSON format and sends it back as the web service response. The mail add-in then pulls the data and displays it on the add-in pane. Figure 2 summarizes the relationships among the Outlook user, mail app, Who web service, and Active Directory.
 
-![Figure 2. Relationships among the Outlook user, mail app, Who web service, and Active Directory](/description/75964e99-a74f-4fd3-a4e1-a0ca40bfc5a4image.png)
+![Figure 2. Relationships among the Outlook user, mail app, Who web service, and Active Directory](/description/75964e99-a74f-4fd3-a4e1-a0ca40bfc5a4image.png "The user interacts with the mail app and AD; the mail interacts with the user and the web service; the web service interacts with the mail app and AD.")
 
  
 See the accompanying article  [How to: Create a mail app to display hierarchy information from Active Directory](http://blogs.msdn.com/b/officeapps/archive/2013/05/15/creating-a-mail-app-to-check-out-active-directory-org-information-for-mail-senders-and-recipients.aspx) in the Apps for Office and SharePoint Blog for a description of the implementation of the mail add-in and the Who web service.
@@ -74,11 +74,11 @@ The mail add-in manifest file, manifest.xml, is directly under d:\WhosWhoAD. If 
 1. In the Outlook rich client, choose File, Manage Apps. This opens a browser for you to log on to Outlook Web App to go to the Exchange Admin Center (EAC).
 2. Log on to your Exchange account.
 3. In the EAC, select the drop-down box that is adjacent to the  + button, and then choose Add from file, as shown in Figure 
-![Figure 3. Installing a mail app from a file in the Exchange Admin Center](/description/f7a57314-42f1-4d15-9752-60e45ade98c3image.png)
+![Figure 3. Installing a mail app from a file in the Exchange Admin Center](/description/f7a57314-42f1-4d15-9752-60e45ade98c3image.png "The plus button menu showing the options Add from Office Store, Add from URL, and Add from file.")
 
 4. In the add from file dialog box, browse to the location of manifest.xml in d:\WhosWhoAD, choose Open, and then choose Next.
 You should then see the Who's Who AD add-in in the list of add-ins for Outlook, as shown in Figure 4.
-![Figure 4. Who's Who AD app installed on the Exchange Admin Center](/description/3977704e-6d30-4067-bb17-e5d1f778795cimage.png)
+![Figure 4. Who's Who AD app installed on the Exchange Admin Center](/description/3977704e-6d30-4067-bb17-e5d1f778795cimage.png "The Who's Who AD app listed on the apps for Outlook page, shown as enabled for the user.")
 
 5. If Outlook is running, close and reopen Outlook.
 
@@ -118,7 +118,7 @@ Do the following to deploy the Who web service and WhoMailApp.html mail add-in f
 10. In the Add Application dialog box, under  Application pool with the DefaultAppPool listed by default, choose Select.
 11. In the Select Application Pool dialog box, under  Properties, ensure that .Net Framework Version: 4.0 or a later version of the .NET Framework is displayed. Choose a different application pool, if necessary, to ensure that the pool uses at least .NET Framework 4.0. Choose OK.
 12. In the Add Application dialog box, ensure that you see Pass-through authentication, as shown in Figure 6. Choose OK. Proceed to Step 14.
-![Figure 5. Add Application dialog box to convert the Who web service as an application in the appropriate application pool on IIS](/description/584495fd-6e4d-45da-9b5b-47d114848342image.png)
+![Figure 5. Add Application dialog box to convert the Who web service as an application in the appropriate application pool on IIS](/description/584495fd-6e4d-45da-9b5b-47d114848342image.png "The Add Application dialog box showing the text Pass-through authentication.")
 
 13. As an alternative to steps 10 through 12, you can create a new application pool that uses .NET Framework 4.0 (or a later version) and pass-through authentication. Select that application pool and proceed to Step 14.
 14. In the middle pane of the IIS Manager, choose Authentication. Verify that Windows Authentication is enabled; right-click to enable it, if necessary.
