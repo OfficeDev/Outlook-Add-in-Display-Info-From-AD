@@ -1,3 +1,17 @@
+---
+topic: sample
+products:
+- Outlook
+- Office 365
+languages:
+- CSS
+- JavaScript
+extensions:
+  contentType: samples
+  technologies:
+  - Add-ins
+  createdDate: 8/17/2015 11:29:52 AM
+---
 # Outlook-Add-in-Display-Info-From-AD
 Learn from this prototype mail add-in how to access basic hierarchy information from Active Directory (AD). Extend this prototype to customize the mail add-in for your organization.
 
