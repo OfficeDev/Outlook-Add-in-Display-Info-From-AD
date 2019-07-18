@@ -1,15 +1,16 @@
 ---
 topic: sample
 products:
-- Outlook
-- Office 365
+- office-outlook
+- office-365
 languages:
-- CSS
-- JavaScript
+- javascript
 extensions:
   contentType: samples
   technologies:
   - Add-ins
+  platforms:
+  - CSS
   createdDate: 8/17/2015 11:29:52 AM
 ---
 # Outlook-Add-in-Display-Info-From-AD
