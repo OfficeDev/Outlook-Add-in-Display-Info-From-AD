@@ -13,7 +13,9 @@ extensions:
   - CSS
   createdDate: 8/17/2015 11:29:52 AM
 ---
+
 # Outlook-Add-in-Display-Info-From-AD
+
 Learn from this prototype mail add-in how to access basic hierarchy information from Active Directory (AD). Extend this prototype to customize the mail add-in for your organization.
 
 **Description of the Who's Who AD mail add-in sample**
@@ -170,6 +172,5 @@ Because the Who's Who AD mail add-in is intended to serve as a prototype, there 
 
 * [More Add-in samples](https://github.com/OfficeDev?utf8=%E2%9C%93&query=-Add-in)
 * [How to: Create a mail app to display hierarchy information from Active Directory](https://blogs.msdn.microsoft.com/officeapps/2013/05/15/creating-a-mail-app-to-check-out-active-directory-org-information-for-mail-senders-and-recipients/)
-
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
