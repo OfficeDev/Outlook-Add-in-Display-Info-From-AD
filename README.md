@@ -1,11 +1,28 @@
-# Outlook add-in: Display info from Azure AD
+---
+page_type: sample
+products:
+- office-outlook
+- office-365
+languages:
+- javascript
+extensions:
+  contentType: samples
+  technologies:
+  - Add-ins
+  platforms:
+  - CSS
+  createdDate: 8/17/2015 11:29:52 AM
+---
+
+# Outlook-Add-in-Display-Info-From-AD
+
 Learn from this prototype mail add-in how to access basic hierarchy information from Active Directory (AD). Extend this prototype to customize the mail add-in for your organization.
 
-**Description of the Who's Who Azure AD mail add-in sample**
+**Description of the Who's Who AD mail add-in sample**
 
 This sample accompanies the topic  [How to: Create a mail app to display hierarchy information from Active Directory](http://blogs.msdn.com/b/officeapps/archive/2013/05/15/creating-a-mail-app-to-check-out-active-directory-org-information-for-mail-senders-and-recipients.aspx) in the Apps for Office and SharePoint Blog.
 
-When you select an email message in Outlook, you can choose the Who's Who AD mail add-in to display Active Directory information about the sender and other recipients of an email message currently selected in Outlookor Outlook Web App. The mail add-in appears in the app bar when you are viewing an email in the Reading Pane or in the mail explorer.
+When you select an email message in Outlook or Outlook Web App, you can choose the Who's Who AD mail add-in to display Active Directory information about the sender and other recipients of an email message currently selected in Outlookor Outlook Web App. The mail add-in appears in the app bar when you are viewing an email in the Reading Pane or in the mail explorer.
 
 When you first choose this mail add-in, it retrieves and displays the sender's detailed professional and hierarchical information from Active Directory—name, job title, department, alias, office number, telephone number, and a picture thumbnail. If the sender has a manager or direct reports, the mail add-in displays a similar subset of information for each of them, as well. Figure 1 shows an example of the Who's Who AD add-in. The screen shot displays information for Belinda Newman, her manager, and direct reports.
 
@@ -21,9 +38,11 @@ Behind the scenes, when you select a sender or recipient, the mail add-in calls 
  
 See the accompanying article  [How to: Create a mail app to display hierarchy information from Active Directory](http://blogs.msdn.com/b/officeapps/archive/2013/05/15/creating-a-mail-app-to-check-out-active-directory-org-information-for-mail-senders-and-recipients.aspx) in the Apps for Office and SharePoint Blog for a description of the implementation of the mail add-in and the Who web service.
 
->**Note:** The Who web service serves only as a prototype and shows a few basic features of Active Directory that are familiar to most Active Directory users. Hopefully this example provides a good starting point for you to extend and support features that are specific to your organization. 
+**Note**
+
+The Who web service serves only as a prototype and shows a few basic features of Active Directory that are familiar to most Active Directory users. Hopefully this example provides a good starting point for you to extend and support features that are specific to your organization. 
  
-## Prerequisites
+**Prerequisites**
 
 To get the most out of this code sample, you should be familiar with web development using HTML and JavaScript, and with Windows Communication Foundation (WCF) web services. You do not need prior knowledge of Active Directory Domain Services.
 
@@ -41,7 +60,7 @@ The following tools were used to develop the Who web service, and deploy the mai
 * Windows Server 2008
 * Internet Information Server (IIS) 7.0
 
-## Key components of the sample
+**Key components of the sample**
 
 The download for this sample consists of the following files and folders:
 
@@ -51,7 +70,7 @@ The download for this sample consists of the following files and folders:
 * The ActiveDirectory folder contains files for the Active Directory wrapper.
 * The BuildProcessTemplates folder contains default markup template files for developing WCF web services.
 
-## Configure the sample
+**Configure the sample**
 
 Use the following steps to obtain the files and modify their references, as appropriate:
 
@@ -67,7 +86,7 @@ The mail add-in manifest file, manifest.xml, is directly under d:\WhosWhoAD. If 
 <SourceLocation DefaultValue="https://webserver/WhosWhoAD/WhoMailApp.html"/>
  ```
 
-## Installing the mail add-in
+**Installing the mail add-in**
 
 1. In the Outlook rich client, choose File, Manage Apps. This opens a browser for you to log on to Outlook Web App to go to the Exchange Admin Center (EAC).
 2. Log on to your Exchange account.
@@ -80,7 +99,8 @@ You should then see the Who's Who AD add-in in the list of add-ins for Outlook, 
 
 5. If Outlook is running, close and reopen Outlook.
 
->**Note** This procedure is applicable only if your Outlook account is on Exchange Server 2013 or a later version.
+**Note**
+This procedure is applicable only if your Outlook account is on Exchange Server 2013 or a later version.
  
 Also, in Step 3, if you do not see Add from file as an option, you need to request that your Exchange administrator provide the necessary permissions for you.
 
@@ -99,9 +119,9 @@ $users | ForEach-Object { New-ManagementRoleAssignment -Role "My Custom Apps" -U
 
 For more information about the My Custom Apps role, see  [My Custom Apps role](http://msdn.microsoft.com/library/aa0321b3-2ec0-4694-875b-7a93d3d99089(Office.15).aspx).
 
-## Deploy the web service
+**Deploy the web service**
 
-To deploy the Who web service and WhoMailApp.html mail add-in file, follow these steps:
+Do the following to deploy the Who web service and WhoMailApp.html mail add-in file:
 
 1. In Visual Studio, open WhoWebService.csproj.
 2. Choose Build, Publish WhoWebService.
@@ -134,7 +154,7 @@ The deployment procedure copies the following files to \\webserver\c$\inetpub\ww
 
 The Who web service can now be accessed on webserver, and you can now use the Who's Who AD mail app in Outlook or Outlook Web App.
 
-## Run and test the sample
+**Run and test the sample**
 
 1. In Outlook, choose an email to read in the Reading Pane.
 2. Choose the Who's Who AD mail add-in from the add-in bar.
@@ -142,16 +162,15 @@ The Who web service can now be accessed on webserver, and you can now use the Wh
 You should be able to see the Active Directory data in the add-in pane, similar to the example in Figure 1.
 
 <a name="Troubleshooting"></a>
-## Troubleshooting
+**Troubleshooting**
 
 If the sender or recipient of an email message has an email address of the form <first name>.<last name>@<domain>, the Active Directory wrapper may not be able to search for the appropriate person in Active Directory. Choose a person whose email address is simply of the form <alias>@<domain>.
 
 Because the Who's Who AD mail add-in is intended to serve as a prototype, there is room for you to customize the mail add-in to fit the requirements of your organization. See the Future extension section in the accompanying article for more information.
 
-## Additional resources
+**Related content**
 
 * [More Add-in samples](https://github.com/OfficeDev?utf8=%E2%9C%93&query=-Add-in)
-* [How to: Create a mail app to display hierarchy information from Active Directory](http://msdn.microsoft.com/library/bb419185-f004-4118-a53d-3b6c8e984c9e.aspx)
-
+* [How to: Create a mail app to display hierarchy information from Active Directory](https://blogs.msdn.microsoft.com/officeapps/2013/05/15/creating-a-mail-app-to-check-out-active-directory-org-information-for-mail-senders-and-recipients/)
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
